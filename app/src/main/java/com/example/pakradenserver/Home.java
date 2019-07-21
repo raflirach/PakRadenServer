@@ -70,7 +70,6 @@ public class Home extends AppCompatActivity
     Category newCategory;
 
     Uri saveUri;
-    private final int PICK_IMAGE_REQUEST = 71;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +213,7 @@ public class Home extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+        if(requestCode == Common.PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null)
         {
             saveUri = data.getData();
@@ -226,7 +225,7 @@ public class Home extends AppCompatActivity
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),Common.PICK_IMAGE_REQUEST);
     }
 
     private void loadMenu() {
@@ -238,7 +237,7 @@ public class Home extends AppCompatActivity
                 categories
         ) {
             @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
+            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, final int position) {
                 viewHolder.txtMenuName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imageView);
@@ -246,7 +245,10 @@ public class Home extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int postion, boolean isLongClick) {
-                        //code LAter
+                        //send Category Id and Start new Activity
+                        Intent foodList = new Intent(Home.this,FoodList.class);
+                        foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
 

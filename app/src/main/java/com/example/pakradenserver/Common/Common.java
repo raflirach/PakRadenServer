@@ -9,4 +9,14 @@ public class Common {
     public static final String DELETE = "Delete";
 
     public static final int PICK_IMAGE_REQUEST = 71;
+
+    public static String convertCodeToStatus(String code)
+    {
+        if(code.equals("0"))
+            return "Diterima";
+        else if(code.equals("1"))
+            return "Sedang dikirim";
+        else
+            return "Terkirim";
+    }
 }

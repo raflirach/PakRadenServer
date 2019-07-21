@@ -29,7 +29,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="@android:color/white"
-        app:srcCompat="@drawable/ic_shopping_cart" />
+        app:srcCompat="@drawable/ic_playlist_add" />
 
 
 </android.support.design.widget.CoordinatorLayout>
